@@ -127,7 +127,7 @@ service.interceptors.response.use(
             // }
             error.message('连接服务器失败')
         }
-        Modal.error({title: '网络请求错误'});
+        Modal.error({title: '网络请求错误2'});
         Nprogress.done();
         return Promise.reject(error)
     }

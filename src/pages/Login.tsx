@@ -14,12 +14,12 @@ class Login extends Component {
     }
 
     login = (form:any) => {
-        login(form.name,form.password).then(response=> {
+        login(form.username,form.password).then(response=> {
             const {code,msg,data} = response.data
             if(code == 0) {
                 set('token',data.token);
                 window.location.href='/'
-                message.success(msg)
+                // message.success(msg)
             } else {
                 message.error(msg)
             }

@@ -50,7 +50,7 @@ service.interceptors.response.use(
             const code = data.code;
             if (code === -1) {
                 // -1 token过期 回到登录页面，结合路由使用
-                // Router.push({path: '/login'})
+                // Router.push({path: '/loginApi'})
             } else if (code === 1) {
                 //  1 成功
                 return response
@@ -91,7 +91,7 @@ service.interceptors.response.use(
                     break;
                 case 404:
                     error.message = '请求错误,未找到该资源'
-                    // window.location.href = "/login"
+                    // window.location.href = "/loginApi"
                     break;
                 case 405:
                     error.message = '请求方法未允许'

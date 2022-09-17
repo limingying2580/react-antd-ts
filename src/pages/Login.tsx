@@ -1,7 +1,7 @@
 import React, {Component,createRef,RefObject} from 'react';
 import {FormInstance, Button, Checkbox, Form, Input, Space, message} from 'antd';
 import '../static/css/login.css'
-import {login} from '../api/login'
+import {loginApi} from '../api/loginApi'
 import {set} from "../utils/storage"
 
 
@@ -14,7 +14,7 @@ class Login extends Component {
     }
 
     login = (form:any) => {
-        login(form.username,form.password).then(response=> {
+        loginApi(form.username,form.password).then(response=> {
             const {code,msg,data} = response.data
             if(code == 0) {
                 set('token',data.token);

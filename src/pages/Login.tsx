@@ -13,13 +13,29 @@ class Login extends Component {
         this.formRef = createRef<FormInstance>()
     }
 
-    login = (form:any) => {
-        loginApi(form.username,form.password).then(response=> {
-            const {code,msg,data} = response.data
-            if(code == 0) {
+    //方法一调用，没有用封装好的http请求
+    // login = (form:any) => {
+    //     loginApi(form.username,form.password).then(response=> {
+    //         const {code,msg,data} = response.data
+    //         if(code == 0) {
+    //             set('token',data.token);
+    //             window.location.href='/'
+    //             // message.success(msg)
+    //         } else {
+    //             message.error(msg)
+    //         }
+    //     })
+    // }
+
+    //方法二调用，用封装好的http请求
+    login = (from: any) => {
+        let params = from
+        loginApi(params).then(response=> {
+            const {msg,data} = response.data
+            if(response.status == 200) {
                 set('token',data.token);
+                message.success("登录成功");
                 window.location.href='/'
-                // message.success(msg)
             } else {
                 message.error(msg)
             }

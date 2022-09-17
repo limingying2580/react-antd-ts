@@ -47,18 +47,20 @@ service.interceptors.response.use(
         Nprogress.done();
         if(response.status === 200) {
             const {data} = response.data;
+            //本次接口中没有data.code,会报错，注释，根据实际接口来
             const code = data.code;
-            if (code === -1) {
-                // -1 token过期 回到登录页面，结合路由使用
-                // Router.push({path: '/loginApi'})
-            } else if (code === 1) {
-                //  1 成功
-                return response
-            } else {
-                //  0 失败
-                // 直接弹出提示框
-                return response
-            }
+            // if (code === -1) {
+            //     // -1 token过期 回到登录页面，结合路由使用
+            //     // Router.push({path: '/loginApi'})
+            // } else if (code === 1) {
+            //     //  1 成功
+            //     return response
+            // } else {
+            //     //  0 失败
+            //     // 直接弹出提示框
+            //     return response
+            // }
+            //登录的接口中data返回的是token，所以下面判断也不会走
             if(data === 4003) {
                 message.warning('您的登录状态已经丢失，请退出后重新登录');
                 return Promise.reject('请登录');
@@ -125,9 +127,9 @@ service.interceptors.response.use(
             // if (JSON.stringify(error).includes('timeout')) {
             //   Message.error('服务器响应超时，请刷新当前页')
             // }
-            error.message('连接服务器失败')
+            error.message('请求超时，连接服务器失败')
         }
-        Modal.error({title: '网络请求错误2'});
+        Modal.error({title: error.message});
         Nprogress.done();
         return Promise.reject(error)
     }

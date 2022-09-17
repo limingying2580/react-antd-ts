@@ -29,10 +29,12 @@ class Login extends Component {
 
     //方法二调用，用封装好的http请求
     login = (from: any) => {
-        let params = from
+        let params:any = from;
         loginApi(params).then(response=> {
             const {msg,data} = response.data
             if(response.status == 200) {
+                // localStorage.setItem('users',JSON.stringify({username,password}))
+                set('users',JSON.stringify(params))
                 set('token',data.token);
                 message.success("登录成功");
                 window.location.href='/'
@@ -42,13 +44,10 @@ class Login extends Component {
         })
     }
 
-    onFinish = (values: any) => {
-        console.log('Success:', values);
-    };
+    // onReset = (form:any) => {
+    //     form.resetFields();
+    // };
 
-    onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
     render() {
         return (
             <>
@@ -60,7 +59,6 @@ class Login extends Component {
                         wrapperCol={{ span: 16 }}
                         initialValues={{ remember: true }}
                         onFinish={this.login}
-                        onFinishFailed={this.onFinishFailed}
                         autoComplete="off"
                     >
                         <Form.Item

@@ -48,7 +48,7 @@ service.interceptors.response.use(
         if(response.status === 200) {
             const {data} = response.data;
             //本次接口中没有data.code,会报错，注释，根据实际接口来
-            const code = data.code;
+            // const code = data.code;
             // if (code === -1) {
             //     // -1 token过期 回到登录页面，结合路由使用
             //     // Router.push({path: '/loginApi'})

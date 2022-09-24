@@ -13,11 +13,11 @@ module.exports = function(app) {
             pathRewrite: {'^/api1': ''} //去除请求前缀，保证交给后台服务器的是正常请求地址(必须配置)
         })
         // 可以配置多个代理
-      /*  proxy('/api', {
-            target: 'http://localhost:3000',
-            changeOrigin: true,
-            pathRewrite: {'^/api': ''}
-        })*/
+        /*  proxy('/api', {
+              target: 'http://localhost:3000',
+              changeOrigin: true,
+              pathRewrite: {'^/api': ''}
+          })*/
     )
 };
 

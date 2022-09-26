@@ -37,7 +37,7 @@ class Login extends Component {
                 set('users',JSON.stringify(params))
                 set('token',data.token);
                 message.success("登录成功");
-                window.location.href='/'
+                window.location.href='/home'
             } else {
                 message.error(msg)
             }

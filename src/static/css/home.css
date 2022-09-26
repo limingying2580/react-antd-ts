@@ -1,0 +1,50 @@
+.page{
+    width: 100%;
+    height: 100%;
+}
+.logo {
+    width: 100%;
+    height: 43px;
+}
+.logoPic {
+    width: 80%;
+    height: 25px;
+    background-color: khaki;
+    margin: 10px auto;
+    display: flex;
+}
+.trigger {
+    line-height: 45px;
+}
+#components-layout-demo-custom-trigger .trigger {
+    padding: 0 24px;
+    font-size: 20px;
+    line-height: 45px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    height: 45px !important;
+    line-height: 45px !important;
+    font-size: 20px;
+    font-weight: 700;
+}
+.footer {
+    height: 45px;
+    padding: 10px 50px;
+    text-align: center;
+}

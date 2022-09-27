@@ -38,6 +38,9 @@ class Login extends Component {
                 set('token',data.token);
                 message.success("登录成功");
                 window.location.href='/home'
+                /*  <Routes>
+                    <Route  path="/home" element={<Home/>}/>
+                </Routes>*/
             } else {
                 message.error(msg)
             }

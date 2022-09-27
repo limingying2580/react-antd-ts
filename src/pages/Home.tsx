@@ -1,19 +1,17 @@
 import React, {Component, useState} from 'react';
 import { Layout, Menu, Button} from 'antd';
 import type { MenuProps } from 'antd';
-import {clear} from "../utils/storage"
+import {clear} from "../utils/storage";
+import menuData from '../jsonText/menu.json'
 import {
     MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-    LaptopOutlined,
-    NotificationOutlined
+    MenuUnfoldOutlined
 } from '@ant-design/icons';
 import "../static/css/home.css"
+import login from "./Login";
+import * as Icon from '@ant-design/icons'
 const { Header, Sider, Footer, Content } = Layout;
-
+const {SubMenu} = Menu;
 
 class Home extends Component {
     layout = () => {
@@ -29,17 +27,19 @@ class Home extends Component {
             collapsed: !this.state.collapsed,
         });
     };
-    items2: MenuProps['items'] = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
+
+   /* antd默认写死情况
+   items2: MenuProps['items'] = [UserOutlined].map(
         (icon, index) => {
             const key = String(index + 1);
 
             return {
                 key: `sub${key}`,
                 icon: React.createElement(icon),
-                label: `subnav ${key}`,
+                label: '用户数据',
 
-                children: new Array(4).fill(null).map((_, j) => {
-                    const subKey = index * 4 + j + 1;
+                children: new Array(2).fill(null).map((_, j) => {
+                    const subKey = index * 2 + j + 1;
                     return {
                         key: subKey,
                         label: `option${subKey}`,
@@ -47,6 +47,29 @@ class Home extends Component {
                 }),
             };
         },
+    );*/
+    iconBC = (name?: string | undefined) =>{
+        console.log(name);
+        // @ts-ignore
+        return React.createElement(Icon[name]);
+    }
+
+ items2: MenuProps['items'] = menuData.map(
+        (item) => {
+            return {
+                key: item.id,
+                icon: this.iconBC(item.icon),
+                label: item.title,
+
+                children: new Array(item.children.length).fill(null).map((_, j) => {
+                    return {
+                        key: item.children[j].id,
+                        icon: this.iconBC(item.children[j].icon),
+                        label: item.children[j].title,
+                    };
+                }),
+            };
+        }
     );
     render() {
         return (

@@ -41,7 +41,27 @@ const router: IRouter[] = [
         path: '/home',
         title: '管理系统',
         key:'/home',
-        component: <Home/>
+        component: <Home/>,
+        children: [
+            {
+                path: '/user',
+                title: '用户管理',
+                key:'/user',
+               /* component: <User/>*/
+                children: [
+                    {
+                        path: '/userList',
+                        title: '用户列表',
+                        key:'/userList'
+                    },
+                    {
+                        path: '/adduser',
+                        title: '增加列表',
+                        key:'/adduser'
+                    }
+                ]
+            }
+        ]
     },
 
 ]

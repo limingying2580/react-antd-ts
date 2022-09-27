@@ -1,18 +1,23 @@
 
   [
     {
-      "id": 1,
+      "key": "首页",
+      "title": "首页",
+      "icon": "HomeOutlined"
+    },
+    {
+      "key": "用户",
       "title": "用户",
       "icon": "UserOutlined",
       "children": [
         {
-          "id": 1.1,
-          "icon": "UserOutlined",
+          "key": "增加用户",
+          "icon": "UserAddOutlined",
           "title": "增加用户"
         },
         {
-          "id": 1.2,
-          "icon": "UserOutlined",
+          "key":  "删除用户",
+          "icon": "UserDeleteOutlined",
           "title": "删除用户"
         }
       ]

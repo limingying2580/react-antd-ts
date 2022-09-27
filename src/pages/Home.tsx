@@ -28,49 +28,29 @@ class Home extends Component {
         });
     };
 
-   /* antd默认写死情况
-   items2: MenuProps['items'] = [UserOutlined].map(
-        (icon, index) => {
-            const key = String(index + 1);
-
-            return {
-                key: `sub${key}`,
-                icon: React.createElement(icon),
-                label: '用户数据',
-
-                children: new Array(2).fill(null).map((_, j) => {
-                    const subKey = index * 2 + j + 1;
-                    return {
-                        key: subKey,
-                        label: `option${subKey}`,
-                    };
-                }),
-            };
-        },
-    );*/
     iconBC = (name?: string | undefined) =>{
-        console.log(name);
         // @ts-ignore
         return React.createElement(Icon[name]);
     }
 
- items2: MenuProps['items'] = menuData.map(
-        (item) => {
-            return {
-                key: item.id,
-                icon: this.iconBC(item.icon),
-                label: item.title,
+     items2: MenuProps['items'] = menuData.map(
+            (item) => {
+                return {
+                    key: item.key,
+                    icon: this.iconBC(item.icon),
+                    label: item.title,
 
-                children: new Array(item.children.length).fill(null).map((_, j) => {
-                    return {
-                        key: item.children[j].id,
-                        icon: this.iconBC(item.children[j].icon),
-                        label: item.children[j].title,
-                    };
-                }),
-            };
-        }
-    );
+                    children:
+                        item.children ? new Array(item.children?.length).fill(null).map((_, j) => {
+                        return {
+                            key: item.children[j].key,
+                            icon: this.iconBC(item.children[j].icon),
+                            label: item.children[j].title,
+                        };
+                    }) : "",
+                };
+            }
+        );
     render() {
         return (
             <>

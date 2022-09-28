@@ -20,3 +20,7 @@ import http from "../utils/http";
 export function loginApi(params: any){
     return http.post('/api1/admin/login',params)
 }
+
+/*export function getMenu(){
+    return http.get('/menu.json')
+}*/

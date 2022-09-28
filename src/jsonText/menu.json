@@ -1,21 +1,25 @@
 
   [
     {
+      "path": "/home",
       "key": "首页",
       "title": "首页",
       "icon": "HomeOutlined"
     },
     {
+      "path": "/users",
       "key": "用户",
       "title": "用户",
       "icon": "UserOutlined",
       "children": [
         {
+          "path": "/addUsers",
           "key": "增加用户",
           "icon": "UserAddOutlined",
           "title": "增加用户"
         },
         {
+          "path": "/deleteUsers",
           "key":  "删除用户",
           "icon": "UserDeleteOutlined",
           "title": "删除用户"

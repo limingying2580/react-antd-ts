@@ -13,13 +13,13 @@
       "icon": "UserOutlined",
       "children": [
         {
-          "path": "/addUsers",
+          "path": "/home/addUsers",
           "key": "增加用户",
           "icon": "UserAddOutlined",
           "title": "增加用户"
         },
         {
-          "path": "/deleteUsers",
+          "path": "/home/deleteUsers",
           "key":  "删除用户",
           "icon": "UserDeleteOutlined",
           "title": "删除用户"

@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 const {Header, Sider, Footer, Content} = Layout;
-const {SubMenu} = Menu;
+const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 
 class Home extends Component {
@@ -68,51 +68,56 @@ class Home extends Component {
      * 使用到componentWillMount，表示组件将要挂载的时候调用，在render之前
      */
     componentWillMount() {
-        const menuList: any = this.renderMenu(menuData);
+      /*  const menuList: any = this.renderMenu(menuData);
         console.log(menuList);
         this.setState({
             menuList
-        })
+        })*/
 
         //通过axios拿数据，这样会有一些报错
-        // axios.get('/menuList.json').then(
-        //     response => {
-        //         console.log("成功，", response.data);
-        //
-        //         let menuD = response.data;
-        //         const menuList: any = this.renderMenu(menuD);
-        //         this.setState({
-        //             menuList
-        //         })
-        // })
+        axios.get('/menuList.json').then(
+            response => {
+                console.log("成功，", response.data);
+
+                let menuD = response.data;
+                const menuList: any = this.renderMenu(menuD);
+                this.setState({
+                    menuList
+                })
+        })
     }
 
     //使用递归
     renderMenu = (data: any) => {
-        return data.map((item: any) => {
-            if (item.children) {
-                return (
-                    <SubMenu key={item.key} title={item.title} icon={this.iconBC(item.icon)}>
-                        {this.renderMenu(item.children)}
-                    </SubMenu>
-                )
-            } else {
-                return (
-                    <MenuItem key={item.key} title={item.title} icon={this.iconBC(item.icon)}>
-                        <Link to={item.path}>
-                            {item.title}
-                        </Link>
-                    </MenuItem>
-                )
-            }
-        })
+        return (
+            <Menu mode="inline"
+                  theme="dark"
+                  items={data} />
+        )
+        // return data.map((item: any) => {
+        //     if (item.children) {
+        //         return (
+        //             <SubMenu key={item.key} title={item.title} icon={this.iconBC(item.icon)}>
+        //                 {this.renderMenu(item.children)}
+        //             </SubMenu>
+        //         )
+        //     } else {
+        //         return (
+        //             <MenuItem key={item.key} title={item.title} icon={this.iconBC(item.icon)}>
+        //                 <Link to={item.path}>
+        //                     {item.title}
+        //                 </Link>
+        //             </MenuItem>
+        //         )
+        //     }
+        // })
     };
 
     /**
      * 生成左侧导航栏的第三种方法，这种解决的路由跳转的问题
      * 其中icon不要有</>
      */
-    getMenuNodes = (menuList: any) => {
+/*    getMenuNodes = (menuList: any) => {
         console.log(menuList)
         return (
             menuList.map((item: any) => {
@@ -133,14 +138,14 @@ class Home extends Component {
                 }
             })
         )
-    }
+    }*/
 
     /**
      * 生成左侧导航栏的第四种方法
      * 进一步模拟接口获取方式，通过axios拿数据
      * 可以在api中进行封装，但是目前没有后端接口，暂时这样处理
      */
-    getMenuByAxios = () => {
+    /*getMenuByAxios = () => {
         return (
             <>
                 {
@@ -174,10 +179,8 @@ class Home extends Component {
                 }
             </>
         )
-
-
     }
-
+*/
     render() {
         return (
             <>
@@ -195,11 +198,15 @@ class Home extends Component {
                                 items={this.items2}
                             ></Menu>*/}
 
-                             <Menu
+                            {/* <Menu
                                 mode="inline"
                                 theme="dark">
                                 {this.state.menuList}
-                            </Menu>
+                            </Menu>*/}
+                             <div
+                              >
+                                {this.state.menuList}
+                            </div>
 
                            {/* <Menu
                                 mode="inline"

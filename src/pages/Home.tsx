@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, ReactNode} from 'react';
 import {Button, Layout, Menu} from 'antd';
 import {clear} from "../utils/storage";
 import menuData from '../jsonText/menu.json'
@@ -8,6 +8,7 @@ import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons';
 import "../static/css/home.css"
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import login from "./Login";
 
 const {Header, Sider, Footer, Content} = Layout;
 const SubMenu = Menu.SubMenu;
@@ -20,7 +21,7 @@ class Home extends Component {
     }
     state = {
         collapsed: false,
-        menuList: ''
+        menuList: {}
     };
 
     setCollapsed = () => {
@@ -36,11 +37,27 @@ class Home extends Component {
 
     /**
      * 生成左侧导航栏的第一种方法，其中icon不要有</>
-     * 这种方法可以生成并显示图标，但是路由不知道怎么处理
+     * 这种方法可以生成并显示图标，路由在其中添加a标签
+     * 这种写法推荐使用的antd 5.x版本中
      */
-/*
+    componentDidMount() {
+        console.log("直接引入的方式 menuData",menuData);
+        console.log("直接引入的方式menuData类型",typeof(menuData))
+        // 通过axios拿数据，这样会有一些报错
+        axios.get('/menuList.json').then(
+            response => {
+                const menuD: any= response.data;
+                console.log("resopnse menuD数据",menuD)
+                console.log("resopnse menuD数据类型",typeof(menuData))
+                this.setState({
+                    menuList: menuD
+                })
+            console.log("通过axios获取的方式 menuList",this.state.menuList)
+            console.log("通过axios获取的方式 menuList数据类型",typeof(this.state.menuList))
+        })
+    }
     items2: MenuProps['items'] = menuData.map(
-           (item) => {
+           (item: any) => {
                return {
                    path: item.path,
                    key: item.key,
@@ -53,26 +70,28 @@ class Home extends Component {
                                key: item.children[j].key,
                                icon: this.iconBC(item.children[j].icon),
                                // label: item.children[j].title,
-                               label: <a href={item.children[j].path} >
-                                   Ant Design
-                               </a>
+                               label:
+                                   <a href={item.children[j].path} >
+                                        Ant Design
+                                   </a>
                            };
                        }) : "",
                };
            }
-       );*/
+       );
 
     /**
      * 生成左侧导航栏的第二种方法，这种解决的路由跳转的问题
      * 其中icon不要有</>
      * 使用到componentWillMount，表示组件将要挂载的时候调用，在render之前
+     * 新的生命周期不用componentWillMount了，改成了componentDidMount
      */
-    componentWillMount() {
-      /*  const menuList: any = this.renderMenu(menuData);
+  /*  componentWillMount() {
+      /!*  const menuList: any = this.renderMenu(menuData);
         console.log(menuList);
         this.setState({
             menuList
-        })*/
+        })*!/
 
         //通过axios拿数据，这样会有一些报错
         axios.get('/menuList.json').then(
@@ -86,32 +105,30 @@ class Home extends Component {
                 })
         })
     }
+    componentWillUnMount() {
+
+    }
 
     //使用递归
     renderMenu = (data: any) => {
-        return (
-            <Menu mode="inline"
-                  theme="dark"
-                  items={data} />
-        )
-        // return data.map((item: any) => {
-        //     if (item.children) {
-        //         return (
-        //             <SubMenu key={item.key} title={item.title} icon={this.iconBC(item.icon)}>
-        //                 {this.renderMenu(item.children)}
-        //             </SubMenu>
-        //         )
-        //     } else {
-        //         return (
-        //             <MenuItem key={item.key} title={item.title} icon={this.iconBC(item.icon)}>
-        //                 <Link to={item.path}>
-        //                     {item.title}
-        //                 </Link>
-        //             </MenuItem>
-        //         )
-        //     }
-        // })
-    };
+        return data.map((item: any) => {
+            if (item.children) {
+                return (
+                    <SubMenu key={item.key} title={item.title} icon={this.iconBC(item.icon)}>
+                        {this.renderMenu(item.children)}
+                    </SubMenu>
+                )
+            } else {
+                return (
+                    <MenuItem key={item.key} title={item.title} icon={this.iconBC(item.icon)}>
+                        <Link to={item.path}>
+                            {item.title}
+                        </Link>
+                    </MenuItem>
+                )
+            }
+        })
+    };*/
 
     /**
      * 生成左侧导航栏的第三种方法，这种解决的路由跳转的问题
@@ -191,22 +208,18 @@ class Home extends Component {
                             <div className="logo">
                                 <div className="logoPic"></div>
                             </div>
-                           {/* <Menu
+                            <Menu
                                 theme="dark"
                                 mode="inline"
                                 defaultSelectedKeys={['2']}
                                 items={this.items2}
-                            ></Menu>*/}
+                            ></Menu>
 
                             {/* <Menu
                                 mode="inline"
                                 theme="dark">
                                 {this.state.menuList}
                             </Menu>*/}
-                             <div
-                              >
-                                {this.state.menuList}
-                            </div>
 
                            {/* <Menu
                                 mode="inline"

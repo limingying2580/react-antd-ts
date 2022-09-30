@@ -44,17 +44,20 @@ class Home extends Component {
         console.log("直接引入的方式 menuData",menuData);
         console.log("直接引入的方式menuData类型",typeof(menuData))
         // 通过axios拿数据，这样会有一些报错
-        axios.get('/menuList.json').then(
-            response => {
-                const menuD: any= response.data;
-                console.log("resopnse menuD数据",menuD)
-                console.log("resopnse menuD数据类型",typeof(menuData))
-                this.setState({
-                    menuList: menuD
+        setTimeout(() => {
+            axios.get('/menuList.json').then(
+                response => {
+                    const menuD: any= response.data;
+                    console.log("resopnse menuD数据",menuD)
+                    console.log("resopnse menuD数据类型",typeof(menuData))
+                    this.setState({
+                        menuList: menuD
+                    })
+                    console.log("通过axios获取的方式 menuList",this.state.menuList)
+                    console.log("通过axios获取的方式 menuList数据类型",typeof(this.state.menuList))
                 })
-            console.log("通过axios获取的方式 menuList",this.state.menuList)
-            console.log("通过axios获取的方式 menuList数据类型",typeof(this.state.menuList))
-        })
+        },0)
+
     }
     items2: MenuProps['items'] = menuData.map(
            (item: any) => {
@@ -72,7 +75,7 @@ class Home extends Component {
                                // label: item.children[j].title,
                                label:
                                    <a href={item.children[j].path} >
-                                        Ant Design
+                                       {item.children[j].title}
                                    </a>
                            };
                        }) : "",

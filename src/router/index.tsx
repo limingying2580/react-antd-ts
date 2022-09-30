@@ -4,6 +4,7 @@ import React, {ReactNode,lazy} from 'react';
 const Login = lazy(() => import ('../pages/Login'))
 const Home = lazy(() => import ('../pages/Home'))
 
+
 //如果是js文件的话，就无视interface的定义
 interface IRouter {
     title?: string,
@@ -42,7 +43,7 @@ const router: IRouter[] = [
         title: '管理系统',
         key:'/home',
         component: <Home/>,
-    },
+    }
 
 ]
 export default router

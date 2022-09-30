@@ -21,6 +21,6 @@ export function loginApi(params: any){
     return http.post('/api1/admin/login',params)
 }
 
-/*export function getMenu(){
-    return http.get('/menu.json')
-}*/
+// export function getMenu(){
+//     return http.get('/jsonText/menu.json')
+// }

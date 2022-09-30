@@ -26,7 +26,7 @@ const http ={
      * @param url 请求地址
      * @param params 请求参数
      */
-    get(url: any,params: any){
+    get(url: any,params?: any){
         const config: any = {
             method: 'get',
             url: url,

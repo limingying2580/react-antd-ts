@@ -21,7 +21,7 @@ class Home extends Component {
     }
     state = {
         collapsed: false,
-        menuList: {}
+        menuList: []
     };
 
     setCollapsed = () => {
@@ -40,24 +40,31 @@ class Home extends Component {
      * 这种方法可以生成并显示图标，路由在其中添加a标签
      * 这种写法推荐使用的antd 5.x版本中
      */
+    /*
+    1.componentDidMount 是在组件完全挂载后才会执行，在此方法中调用setState 会触发重新渲染
+    2.constructor 调用是在一开始，组件未挂载，所以不能用。
+    3.componentWillMount 调用在 constructor 后，在这里的代码调用 setState 不会出发重新渲染
+    4.在 componentWillMount 里进行网络请求会阻碍组件的渲染。
+    */
     componentDidMount() {
-        console.log("直接引入的方式 menuData",menuData);
+        console.log("直接引入的方式 menuData",menuData); //输出对象
         console.log("直接引入的方式menuData类型",typeof(menuData))
-        // 通过axios拿数据，这样会有一些报错
-        setTimeout(() => {
-            axios.get('/menuList.json').then(
-                response => {
-                    const menuD: any= response.data;
-                    console.log("resopnse menuD数据",menuD)
-                    console.log("resopnse menuD数据类型",typeof(menuData))
-                    this.setState({
-                        menuList: menuD
-                    })
-                    console.log("通过axios获取的方式 menuList",this.state.menuList)
+        console.log("直接引入的方式menuData类型",Object.prototype.toString.call(menuData))
+        axios.get('/menuList.json').then(
+            response => {
+                const menuD: any= response.data;
+                console.log("resopnse menuD数据",menuD) //输出对象
+                console.log("resopnse menuD数据类型",typeof(menuD))
+                console.log("resopnse menuD数据类型",Object.prototype.toString.call(menuD))
+                this.setState({
+                    menuList:menuD
+                    },
+                    ()=>{
+                    console.log("通过axios获取的方式 menuList",this.state.menuList) //输出对象
                     console.log("通过axios获取的方式 menuList数据类型",typeof(this.state.menuList))
+                    console.log("通过axios获取的方式 menuList数据类型",Object.prototype.toString.call(this.state.menuList))
                 })
-        },0)
-
+            })
     }
     items2: MenuProps['items'] = menuData.map(
            (item: any) => {

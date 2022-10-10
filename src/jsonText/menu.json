@@ -7,7 +7,6 @@
       "icon": "HomeOutlined"
     },
     {
-      "path": "/users",
       "key": "用户",
       "title": "用户",
       "icon": "UserOutlined",

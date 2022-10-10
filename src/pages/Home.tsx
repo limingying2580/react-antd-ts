@@ -69,10 +69,14 @@ class Home extends Component {
     items2: MenuProps['items'] = menuData.map(
            (item: any) => {
                return {
-                   path: item.path,
                    key: item.key,
                    icon: this.iconBC(item.icon),
-                   label: item.title,
+                   label:
+                       (
+                       <a href={item.path} >
+                           {item.title}
+                        </a>
+                       ),
 
                    children:
                        item.children ? new Array(item.children?.length).fill(null).map((_, j) => {

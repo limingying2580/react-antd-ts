@@ -7,21 +7,21 @@
       "icon": "HomeOutlined"
     },
     {
-      "key": "用户",
+      "key": "人员管理",
       "title": "用户",
       "icon": "UserOutlined",
       "children": [
         {
-          "path": "/home/addUsers",
-          "key": "增加用户",
-          "icon": "UserAddOutlined",
-          "title": "增加用户"
+          "path": "/home/members",
+          "key": "管理员管理",
+          "icon": "UserSwitchOutlined",
+          "title": "管理员管理"
         },
         {
-          "path": "/home/deleteUsers",
-          "key":  "删除用户",
-          "icon": "UserDeleteOutlined",
-          "title": "删除用户"
+          "path": "/home/users",
+          "key":  "用户管理",
+          "icon": "UsergroupAddOutlined",
+          "title": "用户管理"
         }
       ]
     }

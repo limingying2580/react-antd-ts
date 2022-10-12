@@ -2,17 +2,30 @@ import React, {Component,createRef,RefObject} from 'react';
 import {FormInstance, Button, Checkbox, Form, Input, Space, message} from 'antd';
 import '../static/css/login.css'
 import {loginApi} from '../api/loginApi'
-import {set} from "../utils/storage"
-
+import {get, remove, set} from "../utils/storage"
+import {
+    Route,
+    Routes
+} from 'react-router-dom'
+import MenuBars from "./MenuBars";
 
 class Login extends Component {
     formRef:RefObject<FormInstance>
 
     constructor(props: any, context: any) {
         super(props,context);
-        this.formRef = createRef<FormInstance>()
+        this.formRef = createRef<FormInstance>();
     }
 
+    state = {
+        checkboxCheck:false
+    }
+    setCheck = (event:any) => {
+        this.setState({
+            checkboxCheck: !event.target.checked,
+        });
+        console.log(this.state.checkboxCheck)
+    }
     //方法一调用，没有用封装好的http请求
     // login = (form:any) => {
     //     loginApi(form.username,form.password).then(response=> {
@@ -34,13 +47,18 @@ class Login extends Component {
             const {msg,data} = response.data
             if(response.status == 200) {
                 // localStorage.setItem('users',JSON.stringify({username,password}))
-                set('users',JSON.stringify(params))
-                set('token',data.token);
+                if(this.state.checkboxCheck) {
+                    set('users',JSON.stringify(params))
+                } else {
+                    remove('users')
+                }
+                // let userData = get('users')
+                // console.log(userData)
                 message.success("登录成功");
                 window.location.href='/home'
-                /*  <Routes>
-                    <Route  path="/home" element={<Home/>}/>
-                </Routes>*/
+                //   <Routes>
+                //     <Route  path="/home" element={<MenuBars/>}/>
+                // </Routes>
             } else {
                 message.error(msg)
             }
@@ -52,6 +70,7 @@ class Login extends Component {
     // };
 
     render() {
+        const {checkboxCheck} = this.state
         return (
             <>
                 <div className='loginDiv'>
@@ -82,7 +101,7 @@ class Login extends Component {
                         </Form.Item>
 
                         <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-                            <Checkbox>记住帐号密码</Checkbox>
+                            <Checkbox onClick={(event) => this.setCheck(event)}>记住帐号密码</Checkbox>
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

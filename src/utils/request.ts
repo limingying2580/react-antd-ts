@@ -127,7 +127,7 @@ service.interceptors.response.use(
             // if (JSON.stringify(error).includes('timeout')) {
             //   Message.error('服务器响应超时，请刷新当前页')
             // }
-            error.message('请求超时，连接服务器失败')
+            message.error('请求超时，连接服务器失败')
         }
         Modal.error({title: error.message});
         Nprogress.done();

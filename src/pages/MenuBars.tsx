@@ -1,6 +1,6 @@
 import React, {Component, ReactNode} from 'react';
 import {Button, Layout, Menu} from 'antd';
-import {clear} from "../utils/storage";
+import {clear, set} from "../utils/storage";
 import menuData from '../jsonText/menu.json'
 import type { MenuProps } from 'antd';
 import * as Icon from '@ant-design/icons';
@@ -9,6 +9,7 @@ import "../static/css/menubars.css"
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import login from "./Login";
+import {get} from "../utils/storage"
 
 const {Header, Sider, Footer, Content} = Layout;
 const SubMenu = Menu.SubMenu;
@@ -21,11 +22,16 @@ class MenuBars extends Component<Props>{
 
     layout = () => {
         // clear();
-        window.location.href = '/'
+        window.location.href = '/';
+        // if(this.props.checkboxCheck) {
+            let formData = get('users');
+        console.log(formData)
+        // }
     }
     state = {
         collapsed: false,
-        menuList: []
+        menuList: [],
+
     };
 
     setCollapsed = () => {

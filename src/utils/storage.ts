@@ -11,10 +11,19 @@
 export const remove = (key: string) => {
     localStorage.removeItem(key)
 }
-// @ts-ignore
-export const get = (key: string): string | null => {
+
+export const get = (key: string) => {
     localStorage.getItem(key)
 }
+
+/**
+ * 引用类型，包括 Object 和 Array
+ * localStorage.setItem(key, JSON.stringify(value))
+ *
+ * 基本类型直接存储
+ * 注意如果不是 string 类型，则会调用 toString 方法尝试转为 string
+ * localStorage.setItem(key, value)
+ */
 export const set = (key: string,val: string) => {
     localStorage.setItem(key,val)
 }

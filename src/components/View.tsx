@@ -1,5 +1,5 @@
 import React, {Component,Suspense,lazy} from 'react'; //Suspense懒加载用
-import router from "../router";
+import router, {unRouter} from "../router";
 import {
     BrowserRouter as Router,
     Route,
@@ -7,7 +7,10 @@ import {
 } from 'react-router-dom'
 import "../static/css/login.css"
 // import Login from "../pages/Login";
+import MenuBars from "../pages/MenuBars";
 const Login = lazy(() => import ('../pages/Login'))
+// const MenuBars = lazy(() => import ('../pages/MenuBars'));
+
 class View extends Component {
     render() {
         return (
@@ -21,13 +24,29 @@ class View extends Component {
 
                 <Routes>
                     {
-                        router.map((item, i) => {
+                        unRouter.map((item, i) => {
                             return (
                                 <Route key={item.key} path={item.path} element={
                                     <Suspense fallback={
                                         <div className='loading'>Loading...</div>
                                     }>
                                         {item.component}
+                                    </Suspense>
+
+                                }/>
+                            )
+                        })
+                    }
+                    {
+                        router.map((item, i) => {
+                            return (
+                                <Route key={item.key} path={item.path} element={
+                                    <Suspense fallback={
+                                        <div className='loading'>Loading...</div>
+                                    }>
+                                        <MenuBars>
+                                            {item.component}
+                                        </MenuBars>
                                     </Suspense>
 
                                 }/>

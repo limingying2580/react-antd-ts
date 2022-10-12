@@ -2,9 +2,15 @@
   [
     {
       "path": "/home",
-      "key": "首页",
+      "key": "home",
       "title": "首页",
       "icon": "HomeOutlined"
+    },
+    {
+      "path": "/dashboard",
+      "key": "dashboard",
+      "title": "仪表盘",
+      "icon": "DashboardOutlined"
     },
     {
       "key": "人员管理",
@@ -12,13 +18,7 @@
       "icon": "UserOutlined",
       "children": [
         {
-          "path": "/home/members",
-          "key": "管理员管理",
-          "icon": "UserSwitchOutlined",
-          "title": "管理员管理"
-        },
-        {
-          "path": "/home/users",
+          "path": "/users",
           "key":  "用户管理",
           "icon": "UsergroupAddOutlined",
           "title": "用户管理"

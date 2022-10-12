@@ -1,8 +1,11 @@
 import React, {ReactNode,lazy} from 'react';
 // import Home from "../pages/Home";
 
-const Login = lazy(() => import ('../pages/Login'))
-const Home = lazy(() => import ('../pages/Home'))
+const Login = lazy(() => import ('../pages/Login'));
+const Page404 = lazy(() => import ('../pages/Page404'));
+const Home = lazy(() => import ('../components/Home'));
+const Dashboard = lazy(() => import('../components/Dashboard'))
+const Users = lazy(() => import('../components/Users'))
 
 
 //如果是js文件的话，就无视interface的定义
@@ -27,6 +30,28 @@ interface IRouter {
  ]*/
 const router: IRouter[] = [
     {
+        path: '/dashboard',
+        title: '仪表盘',
+        key:'/dashboard',
+        component: <Dashboard/>,
+    },
+    {
+        path: '/home',
+        title: '首页',
+        key:'/home',
+        component: <Home/>,
+    },
+    {
+        path: '/users',
+        title: '用户',
+        key:'/users',
+        component: <Users/>,
+    }
+]
+export default router
+
+export const unRouter: IRouter[] = [
+    {
         path: '/',
         title: '',
         key:'/',
@@ -39,11 +64,9 @@ const router: IRouter[] = [
         component: <Login/>
     },
     {
-        path: '/home',
-        title: '管理系统',
-        key:'/home',
-        component: <Home/>,
+        path: '*',
+        title: '404',
+        key:'404',
+        component: <Page404/>
     }
-
 ]
-export default router

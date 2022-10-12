@@ -4,8 +4,8 @@ import {clear} from "../utils/storage";
 import menuData from '../jsonText/menu.json'
 import type { MenuProps } from 'antd';
 import * as Icon from '@ant-design/icons';
-import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons';
-import "../static/css/home.css"
+import {MenuFoldOutlined, MenuUnfoldOutlined, MessageOutlined, BellOutlined} from '@ant-design/icons';
+import "../static/css/menubars.css"
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import login from "./Login";
@@ -20,7 +20,7 @@ interface Props {
 class MenuBars extends Component<Props>{
 
     layout = () => {
-        clear();
+        // clear();
         window.location.href = '/'
     }
     state = {
@@ -77,11 +77,11 @@ class MenuBars extends Component<Props>{
                 icon: this.iconBC(item.icon),
                 label:
                     (
-                        <a href={item.path} >
+                        <Link to={item.path} >
                             {
                                 item.title
                             }
-                        </a>
+                        </Link>
                     ),
 
                 children:
@@ -91,11 +91,11 @@ class MenuBars extends Component<Props>{
                             icon: this.iconBC(item.children[j].icon),
                             // label: item.children[j].title,
                             label:
-                                <a href={item.children[j].path} >
+                                <Link to={item.children[j].path} >
                                     {
                                         item.children[j].title
                                     }
-                                </a>
+                                </Link>
                         };
                     }) : "",
             };
@@ -265,10 +265,15 @@ class MenuBars extends Component<Props>{
                                     onClick: () => this.setCollapsed(),
                                 })}
                                 <span className="managerName">react-ts-antd-manager</span>
-                                <Button type="primary" style={{marginTop: "7px"}} onClick={this.layout}>退出</Button>
+                                <span className="layout-message" style={{marginRight:"15px"}}>
+                                    <MessageOutlined />
+                                    <BellOutlined />
+                                    <div className="avatar" onClick={this.layout}></div>
+                                    {/*<Button type="primary" style={{marginTop: "7px"}} onClick={this.layout}>退出</Button>*/}
+                                </span>
                             </Header>
                             <Content
-                                className="site-layout-background"
+                                className="site-layout-background contentDiv"
                                 style={{
                                     margin: '24px 16px 0 16px',
                                     padding: 24,

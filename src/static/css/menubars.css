@@ -33,7 +33,22 @@
     margin: 16px;
     background: rgba(255, 255, 255, 0.3);
 }
-
+.ant-layout-header {
+    align-items: center;
+}
+.layout-message {
+    width: 100px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+.avatar {
+    width: 20px;
+    height: 20px;
+    border-right: 10px;
+    background-image: url("../img/avatar.jpg");
+    background-size: cover;
+}
 .site-layout .site-layout-background {
     display: flex;
     justify-content: space-between;
@@ -43,8 +58,12 @@
     font-size: 20px;
     font-weight: 700;
 }
+.contentDiv {
+    /*overflow: scroll;*/
+}
 .footer {
     height: 45px;
-    padding: 10px 50px;
+    padding: 10px 50px !important;
     text-align: center;
+    align-items: center;
 }
